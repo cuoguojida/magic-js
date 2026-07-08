@@ -1,3 +1,16 @@
+# (Wed Jul 08 2026)
+
+#### 🐛 Bug Fix
+
+- `@magic-sdk/react-native-bare@34.8.1`, `@magic-sdk/react-native-expo@34.8.1`
+  - Remove OIDC packages [#1106](https://github.com/magiclabs/magic-js/pull/1106) ([@Ethella](https://github.com/Ethella))
+
+#### Authors: 1
+
+- Jerry Liu ([@Ethella](https://github.com/Ethella))
+
+---
+
 # (Thu Jul 02 2026)
 
 #### 🚀 Enhancement
