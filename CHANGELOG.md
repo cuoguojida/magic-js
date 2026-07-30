@@ -1,5 +1,18 @@
 # (Thu Jul 30 2026)
 
+#### 🚀 Enhancement
+
+- `@magic-sdk/types@27.10.0`
+  - Remove deprecated packages [#1108](https://github.com/magiclabs/magic-js/pull/1108) ([@joshuascan](https://github.com/joshuascan))
+
+#### Authors: 1
+
+- Josh Scanlan ([@joshuascan](https://github.com/joshuascan))
+
+---
+
+# (Thu Jul 30 2026)
+
 #### 💥 Breaking Change
 
 - `@magic-ext/bitcoin@29.0.0`

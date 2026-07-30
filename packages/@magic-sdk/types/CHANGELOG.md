@@ -1,3 +1,15 @@
+# v27.10.0 (Thu Jul 30 2026)
+
+#### 🚀 Enhancement
+
+- Remove deprecated packages [#1108](https://github.com/magiclabs/magic-js/pull/1108) ([@joshuascan](https://github.com/joshuascan))
+
+#### Authors: 1
+
+- Josh Scanlan ([@joshuascan](https://github.com/joshuascan))
+
+---
+
 # v27.9.0 (Thu Jul 02 2026)
 
 #### 🚀 Enhancement
