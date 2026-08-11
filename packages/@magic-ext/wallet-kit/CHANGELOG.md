@@ -1,3 +1,16 @@
+# v0.14.1 (Tue Aug 11 2026)
+
+#### 🐛 Bug Fix
+
+- fix: avoid argument limit in webauthn base64url encoding [#1095](https://github.com/magiclabs/magic-js/pull/1095) ([@samsamtrum](https://github.com/samsamtrum) [@joshuascan](https://github.com/joshuascan))
+
+#### Authors: 2
+
+- Josh Scanlan ([@joshuascan](https://github.com/joshuascan))
+- Kaly Node ([@samsamtrum](https://github.com/samsamtrum))
+
+---
+
 # v0.11.0 (Tue May 05 2026)
 
 #### 🚀 Enhancement

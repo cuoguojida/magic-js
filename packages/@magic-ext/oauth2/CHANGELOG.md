@@ -1,3 +1,28 @@
+# v15.11.1 (Tue Aug 11 2026)
+
+#### 🐛 Bug Fix
+
+- fix: avoid argument limit in webauthn base64url encoding [#1095](https://github.com/magiclabs/magic-js/pull/1095) ([@samsamtrum](https://github.com/samsamtrum) [@joshuascan](https://github.com/joshuascan))
+
+#### Authors: 2
+
+- Josh Scanlan ([@joshuascan](https://github.com/joshuascan))
+- Kaly Node ([@samsamtrum](https://github.com/samsamtrum))
+
+---
+
+# v15.10.0 (Thu Jul 02 2026)
+
+#### 🚀 Enhancement
+
+- feat: add passkey mfa to oauth [#1105](https://github.com/magiclabs/magic-js/pull/1105) ([@sherzod-bakhodirov](https://github.com/sherzod-bakhodirov))
+
+#### Authors: 1
+
+- [@sherzod-bakhodirov](https://github.com/sherzod-bakhodirov)
+
+---
+
 # v15.8.0 (Fri May 15 2026)
 
 #### 🚀 Enhancement

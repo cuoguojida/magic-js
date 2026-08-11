@@ -1,9 +1,7 @@
 import { Base64URL } from '@magic-sdk/provider';
 
 function isAuthenticatorAssertionResponse(value: AuthenticatorResponse): value is AuthenticatorAssertionResponse {
-  if (typeof value !== 'object') {
-    return false;
-  }
+  if (typeof value !== 'object') return false;
   if (
     (value as AuthenticatorAssertionResponse)?.authenticatorData === undefined ||
     typeof (value as AuthenticatorAssertionResponse)?.authenticatorData !== 'object'
@@ -14,9 +12,7 @@ function isAuthenticatorAssertionResponse(value: AuthenticatorResponse): value i
 }
 
 function isAuthenticatorAttestationResponse(value: AuthenticatorResponse): value is AuthenticatorAttestationResponse {
-  if (typeof value !== 'object') {
-    return false;
-  }
+  if (typeof value !== 'object') return false;
   if (
     (value as AuthenticatorAttestationResponse)?.attestationObject === undefined ||
     typeof (value as AuthenticatorAttestationResponse)?.attestationObject !== 'object'
@@ -32,7 +28,6 @@ function isAuthenticatorAttestationResponse(value: AuthenticatorResponse): value
  * See https://w3c.github.io/webauthn/#dom-publickeycredential-tojson
  */
 export function toJSON(cred: PublicKeyCredential): PublicKeyCredentialJSON {
-  // Prefer native implementation if available
   if (typeof cred.toJSON === 'function') {
     return cred.toJSON();
   }
@@ -44,7 +39,6 @@ export function toJSON(cred: PublicKeyCredential): PublicKeyCredentialJSON {
     const clientExtensionResults = {};
     const type = cred.type;
 
-    // This is authentication.
     if (isAuthenticatorAssertionResponse(cred.response)) {
       return {
         id,
@@ -62,7 +56,6 @@ export function toJSON(cred: PublicKeyCredential): PublicKeyCredentialJSON {
     }
 
     if (isAuthenticatorAttestationResponse(cred.response)) {
-      // This is registration.
       return {
         id,
         rawId,
@@ -82,4 +75,34 @@ export function toJSON(cred: PublicKeyCredential): PublicKeyCredentialJSON {
     console.error(error);
     throw error;
   }
+}
+
+/**
+ * Polyfill `PublicKeyCredential.parseRequestOptionsFromJSON`
+ *
+ * See https://w3c.github.io/webauthn/#sctn-parseRequestOptionsFromJSON
+ */
+export function parseRequestOptionsFromJSON(
+  options: PublicKeyCredentialRequestOptionsJSON,
+): PublicKeyCredentialRequestOptions {
+  if (
+    typeof PublicKeyCredential !== 'undefined' &&
+    typeof PublicKeyCredential.parseRequestOptionsFromJSON === 'function'
+  ) {
+    return PublicKeyCredential.parseRequestOptionsFromJSON(options);
+  }
+
+  const challenge = Base64URL.decode(options.challenge) as ArrayBuffer;
+  const allowCredentials =
+    options.allowCredentials?.map(cred => ({
+      ...cred,
+      id: Base64URL.decode(cred.id) as ArrayBuffer,
+      transports: cred.transports as AuthenticatorTransport[] | undefined,
+    })) ?? [];
+
+  return {
+    ...options,
+    allowCredentials,
+    challenge,
+  } as PublicKeyCredentialRequestOptions;
 }

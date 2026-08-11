@@ -1,4 +1,4 @@
-import { Base64URL } from '@magic-sdk/provider';
+import { Base64URL } from './base64-json';
 
 function isAuthenticatorAssertionResponse(value: AuthenticatorResponse): value is AuthenticatorAssertionResponse {
   if (typeof value !== 'object') {
@@ -82,4 +82,38 @@ export function toJSON(cred: PublicKeyCredential): PublicKeyCredentialJSON {
     console.error(error);
     throw error;
   }
+}
+
+/**
+ * Polyfill `PublicKeyCredential.parseRequestOptionsFromJSON`
+ *
+ * See https://w3c.github.io/webauthn/#sctn-parseRequestOptionsFromJSON
+ */
+export function parseRequestOptionsFromJSON(
+  options: PublicKeyCredentialRequestOptionsJSON,
+): PublicKeyCredentialRequestOptions {
+  if (
+    typeof PublicKeyCredential !== 'undefined' &&
+    typeof PublicKeyCredential.parseRequestOptionsFromJSON === 'function'
+  ) {
+    return PublicKeyCredential.parseRequestOptionsFromJSON(options);
+  }
+
+  const challenge = Base64URL.decode(options.challenge) as ArrayBuffer;
+  const allowCredentials =
+    options.allowCredentials?.map(cred => {
+      return {
+        ...cred,
+        id: Base64URL.decode(cred.id) as ArrayBuffer,
+        transports: cred.transports as AuthenticatorTransport[] | undefined,
+      } as PublicKeyCredentialDescriptor;
+    }) ?? [];
+
+  const toReturn = {
+    ...options,
+    allowCredentials,
+    challenge,
+  } as PublicKeyCredentialRequestOptions;
+
+  return toReturn;
 }
