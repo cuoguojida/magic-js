@@ -1,3 +1,17 @@
+# (Tue Aug 11 2026)
+
+#### 🐛 Bug Fix
+
+- `@magic-ext/oauth2@15.11.1`, `@magic-ext/passkey@1.4.1`, `@magic-ext/wallet-kit@0.14.1`, `@magic-ext/webauthn@27.9.1`, `@magic-sdk/provider@33.10.1`
+  - fix: avoid argument limit in webauthn base64url encoding [#1095](https://github.com/magiclabs/magic-js/pull/1095) ([@samsamtrum](https://github.com/samsamtrum) [@joshuascan](https://github.com/joshuascan))
+
+#### Authors: 2
+
+- Josh Scanlan ([@joshuascan](https://github.com/joshuascan))
+- Kaly Node ([@samsamtrum](https://github.com/samsamtrum))
+
+---
+
 # (Thu Jul 30 2026)
 
 #### 🚀 Enhancement
